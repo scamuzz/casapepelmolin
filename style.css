@@ -30,8 +30,11 @@ nav {
 .nav-links { display: flex; gap: 1.8rem; list-style: none; }
 .nav-links a { color: var(--gold-pale); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; transition: color .3s; }
 .nav-links a:hover { color: var(--gold); }
-.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-.nav-toggle span { display: block; width: 25px; height: 2px; background: var(--gold); border-radius: 2px; transition: .3s; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; z-index: 1100; }
+.nav-toggle span { display: block; width: 26px; height: 3px; background: var(--gold); border-radius: 3px; transition: transform .3s, opacity .3s; }
+.nav-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 /* ── HERO ── */
 #hero {
@@ -142,6 +145,7 @@ section { padding: 5rem 1.5rem; }
 .orari-table td:first-child { font-weight: 700; color: var(--white); }
 .orari-table td:last-child { text-align: right; color: var(--gold-light); }
 .orari-table tr.chiuso td { opacity: .5; }
+.orari-table tr.oggi td { color: var(--gold) !important; font-weight: 700; }
 
 /* ── FOOTER ── */
 footer { background: #0d2018; border-top: 2px solid var(--gold); text-align: center; padding: 2rem 1rem; color: var(--gold-pale); font-size: 0.85rem; }
@@ -158,9 +162,21 @@ footer .footer-links a:hover { opacity: 1; color: var(--gold); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--green-dark); padding: 1rem 0; border-top: 1px solid var(--gold); }
+  nav { padding: 0 1.2rem; }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; left: 0;
+    width: 100%;
+    background: var(--green-dark);
+    padding: 1rem 0;
+    border-top: 1px solid var(--gold);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
   .nav-links.open { display: flex; }
-  .nav-links li { text-align: center; padding: .7rem 0; }
+  .nav-links li { text-align: center; padding: .8rem 0; border-bottom: 1px solid rgba(201,168,76,0.1); }
+  .nav-links li:last-child { border-bottom: none; }
   .nav-toggle { display: flex; }
   .about-grid { grid-template-columns: 1fr; }
   .about-img-box { min-height: 220px; }
@@ -171,4 +187,6 @@ footer .footer-links a:hover { opacity: 1; color: var(--gold); }
 @media (max-width: 480px) {
   .gallery-grid { grid-template-columns: 1fr; }
   .gallery-item:first-child { grid-column: span 1; }
+  .hero-title { font-size: 2.4rem; }
+  section { padding: 3.5rem 1rem; }
 }
